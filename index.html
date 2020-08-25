@@ -44,9 +44,34 @@
       crossorigin="anonymous"
     ></script>
     <!-- Font Awesome load end -->
-  </head>
+    <style>
+      .bigPictureWrapper {
+			position: absolute;
+			display: none;
+			justify-content: center;
+			align-items: center;
+			top:0%;
+			width:100%;
+			height:100%;
+			background-color: gray; 
+			z-index: 100;
+			background:rgba(255,255,255,0.5);
+		}
+		.bigPicture {
+			position: relative;
+			display:flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.bigPicture img {
+			width:60%;
+		}
+      </style>
+    </head>
   <body>
     <div id="fullpage">
+     
       <div id="mp" class="section">
         <div id="name">하루 한 걸음이 천일이면 천 걸음<br />꾸준히 나아가는 개발자 손현모입니다</div>
       </div>
@@ -85,6 +110,10 @@
         </div>
       </div>
       <div id="portfolio" class="section">
+       <div class='bigPictureWrapper'>
+		<div class='bigPicture'>
+		</div>
+	</div>
         <span id="project_bottom">프로젝트 제목 클릭 시 코드로 이동</span>
         <div class="slide">
           <div class="portfolio">
@@ -151,6 +180,7 @@
             </div>
           </div>
         </div>
+        
         <div class="slide">
           <div class="portfolio">
             <a target="_blank" href="https://github.com/lonoka/book"
@@ -270,5 +300,31 @@
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"
   ></script>
+  <script type="text/javascript">
+	$(document).ready(function (e){
+		
+		$(document).on("click","img",function(){
+			var path = $(this).attr('src')
+			showImage(path);
+		});//end click event
+		
+		function showImage(fileCallPath){
+		    
+		    $(".bigPictureWrapper").css("display","flex").show();
+		    
+		    $(".bigPicture")
+		    .html("<img src='"+fileCallPath+"' >")
+		    .animate({width:'100%', height: '100%'}, 100);
+		    
+		  }//end fileCallPath
+		  
+		$(".bigPictureWrapper").on("click", function(e){
+		    $(".bigPicture").animate({width:'0%', height: '0%'}, 100);
+		    setTimeout(function(){
+		      $('.bigPictureWrapper').hide();
+		    }, 100);
+		  });//end bigWrapperClick event
+	});
+</script>
   <!-- bootstrap JS load end -->
 </html>
